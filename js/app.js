@@ -1,5 +1,3 @@
-console.log('Load WPA logic');
-
 let getWordsButton = document.getElementById('generate-solutions');
 let getWordsText = document.getElementById('data-letters');
 let getWordsSize = document.getElementById('data-size');
@@ -72,6 +70,7 @@ function parseFile(data, words){
     const lines = data.split('\r\n').map(str => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     });
+    log('Check data (' + lines.length + ' records)');
     lines.forEach(line => {
         words.forEach(w => {
             if (line.toUpperCase() === w.toUpperCase()) {
@@ -93,9 +92,11 @@ function browseInFiles(urls, words, cb)
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             const data = xmlHttp.responseText;
+            log('Parse file "' + url + '"');
             parseFile(data, words);
-            browseInFiles(urls, words, cb);
+            log('Parse file "' + url + '", done!');
         }
+        browseInFiles(urls, words, cb);
     }
     xmlHttp.open("GET", url, true);
     xmlHttp.setRequestHeader('Content-type', 'text/plain; charset=utf-8')
@@ -176,5 +177,3 @@ getWordsResultToggle.addEventListener('click', (event) => {
 		getWordsLog.style.display = 'block';
 	}
 });
-
-console.log('Load WPA logic, done!');
