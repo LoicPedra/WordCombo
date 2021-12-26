@@ -133,7 +133,7 @@ function perform() {
     log('Search combinations for "' + letters + '"');
     let words = getPossibleWords(letters.toUpperCase());
 
-    browseInFiles(['/wordcombo/data/fr/words.txt'], words, function() {
+    browseInFiles(['/WordCombo/data/fr/words.txt'], words, function() {
         log('Possible words found:');
         wordsMatching.filter(function(item, pos) {
             return wordsMatching.indexOf(item) == pos;
